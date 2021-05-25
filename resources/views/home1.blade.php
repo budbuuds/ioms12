@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('Selamat datang Panitia') }}
+                    {{ __('Selamat datang Peserta') }}
                 </div>
             </div>
         </div>
