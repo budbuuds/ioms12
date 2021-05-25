@@ -22,3 +22,5 @@ Route::get('/', function () {
     Route::post('news', 'Backend\NewsController@store')->name('news.store');
     Route::post('cari_data_news', 'Backend\NewsController@cari_data_news')->name('cari_data_news');
     Route::delete('news/{news}', 'Backend\NewsController@destroy')->name('news.delete');
+    Route::post('news/active', 'Backend\NewsController@active')->name('news.active');
+    Route::post('news/non_active', 'Backend\NewsController@non_active')->name('news.non_active');
