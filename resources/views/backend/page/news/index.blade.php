@@ -32,19 +32,37 @@
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th style="width:5%">No</th>
+                                    <th style="width:5%" class="tect-center">No</th>
                                     <th>Informasi</th>
                                     <th>Status</th>
-                                    <th style="width:10%">Aksi</th>
+                                    <th style="width:5%">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                @foreach($news as $i => $info)
+                                    <tr>
+                                        <td class="tect-center">{{ $i + 1 }}</td>
+                                        <td>{{ $info->news_title }}</td>
+                                        <td>
+                                            <label class="switch">
+                                                <input 
+                                                    type="checkbox" 
+                                                    class="cek_status" 
+                                                    id="cek_status" 
+                                                    value="{{ $info->news_status }}" 
+                                                    onchange="cekStatus(<?= $info->news_id ?>, this)" 
+                                                    <?php echo ($info->news_status == 'on') ? "checked" : "" ?> >
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <!-- <button type="button" class="btn btn-warning btn-sm" 
+                                            onclick="modal_tambah('{{ route("news.store") }}', '{{ $info->news_id  }}')"><i class="fa fa-edit .text-white" style="color: #fff !important"></i></button> -->
+                                            <button type="button" class="btn btn-danger btn-sm" 
+                                            onclick="modal_hapus('{{ route('news.delete', $info->news_id) }}')"><i class="fa fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                         </tbody>
                         </table>
                     </div>
@@ -66,7 +84,7 @@
                 @php
                     $news = DB::table('news')->first();
                 @endphp
-                    <form action="" method="POST" enctype="multipart/form-data" id="formarticel">
+                    <form action="" method="POST" enctype="multipart/form-data" id="formNews">
                         @csrf
                         <input type="hidden" name="news_id" id="news_id">
                         <div class="form-group">
@@ -115,30 +133,46 @@
             if(aksi != 'tambah'){
                 // ambil data dari axios
                 axios.post("{{ route('cari_data_news') }}", {
-                    'articel_id': aksi,
+                    'news_id': aksi,
                 }).then(function(res) {
-                    var artikel = res.data;
-                    console.log(artikel)
-                    $('#articel_id').val(artikel.articel_id);
-                    $('#articel_judul').val(artikel.articel_judul);
-                    $('#articel_tanggal').val(artikel.articel_tanggal);
-                    $('#articel_penulis').val(artikel.articel_penulis);
-                    $('#articel_isi').val(artikel.articel_isi);
-                    $('#articel_gambar').attr('required', false);
-                    // $('#kategori_id').val(artikel.kategori_id).change();
+                    var news = res.data;
+                    console.log(news)
+                    $('#news_id').val(news.news_id);
+                    $('#news_title').val(news.news_title);
+                    $('#news').val(news.news);
                 }).catch(function(err) {
                     // console.log(err)
                 })
             }else{
-                $('#articel_judul').val('');
-                $('#articel_tanggal').val('');
-                $('#articel_penulis').val('');
-                $('#articel_isi').val('');
-                $('#articel_gambar').val('');
-                $('#articel_gambar').attr('required', true);
+                $('#news_title').val('');
+                $('#news').val('');
             }
-            $('#formarticel').attr('action', url);
+            $('#formNews').attr('action', url);
             $('#ModalTambah').modal('show');
+        }
+
+        function cekStatus(news_id, ceklis) {
+            if (ceklis.checked) {
+                // alert("ceklis Dihidupkan")
+                axios.post("{{route('news.active')}}", {
+                    'id': news_id,
+                }).then(function(res) {
+                    console.log(res.data.message)
+                    toastr.info(res.data.message)
+                }).catch(function(err) {
+                    console.log(err);
+                })
+            } else {
+                // alert("Ceklis dimatikan")
+                axios.post("{{route('news.non_active')}}", {
+                    'id': news_id,
+                }).then(function(res) {
+                    // console.log(res.data.message)
+                    toastr.warning(res.data.message)
+                }).catch(function(err) {
+                    console.log(err);
+                })
+            }
         }
 
         // untuk hapus data

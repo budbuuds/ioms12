@@ -21,7 +21,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="#" class="nav-link {{ $active == '' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -30,7 +30,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('news')}}" class="nav-link">
+                    <a href="{{ route('news')}}" class="nav-link {{ $active == 'news' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-mug-hot"></i>
                         <p>
                             News
