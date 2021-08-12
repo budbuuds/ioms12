@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Info</h1>
+                    <h1>Informasi</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -26,11 +26,11 @@
                         </div>
                     @endif
                     <div class="card-body">
-                        <button onclick="modal_tambah('{{route("news.store")}}', 'tambah')" class="btn btn-lg btn-secondary my-4">
+                        <button onclick="modal_tambah('{{route("news.store")}}', 'tambah')" class="btn btn-lg btn-warning my-4">
                             <i class="fa fa-plus"> Tambah info</i>
                         </button>
                         <table id="example2" class="table table-bordered table-hover">
-                            <thead>
+                            <thead class="table-secondary">
                                 <tr>
                                     <th style="width:5%" class="tect-center">No</th>
                                     <th>Informasi</th>

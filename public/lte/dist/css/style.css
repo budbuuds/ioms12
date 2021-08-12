@@ -4,8 +4,12 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+.layout-navbar-fixed .wrapper .main-header {
+    background-color: #DCE0E2;
+}
+
 .content-wrapper {
-    background-color: #FFFFFF !important;
+    background-color: #DCE0E2 !important;
 }
 
 .btn-secondary {
