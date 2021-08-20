@@ -10,7 +10,7 @@ class PesertaModel extends Model
 {
     use SoftDeletes;
     use Timestamp;
-    protected $table = 'news';
+    protected $table = 'participant';
     protected $primaryKey = 'participant_id';
     protected $fillable = [
         'name',

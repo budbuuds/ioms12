@@ -3,6 +3,9 @@
 body {
     font-family: 'Poppins', sans-serif;
 }
+a.detail{
+    color: #000 !important;
+}
 
 .layout-navbar-fixed .wrapper .main-header {
     background-color: #DCE0E2;
@@ -18,8 +21,12 @@ body {
 }
 
 .modal-body {
-    background-color: #C4C4C4;
+    /* background-color: #C4C4C4; */
     border-radius: 25px;
+}
+
+.zone.dropdown-toggle::after {
+    display: none;
 }
 
 .modal-content {

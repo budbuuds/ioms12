@@ -28,6 +28,9 @@ Route::get('/home1', 'HomeController@index1')->name('home1');
     Route::delete('news/{news}', 'Backend\NewsController@destroy')->name('news.delete');
     Route::post('news/active', 'Backend\NewsController@active')->name('news.active');
     Route::post('news/non_active', 'Backend\NewsController@non_active')->name('news.non_active');
+
     // status
     Route::get('status', 'Backend\StatusController@index')->name('status');
-
+    Route::post('status/checked', 'Backend\StatusController@checked');
+    Route::post('status/unchecked', 'Backend\StatusController@unchecked');
+    Route::post('zone', 'Backend\StatusController@zone');
